@@ -7,7 +7,7 @@
                     {{currentUser.userName}}
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item"   href="#"  v-for="user in Users" v-if="currentUser !==user" @click="OtherUser(user)"> {{user.userName}}</a>
+                    <a class="dropdown-item"   href="#"  v-for="user in Users" @click="OtherUser(user)"> {{user.userName}}</a>
                 </div>
             </div>
         </form>
@@ -16,19 +16,18 @@
 
 <script>
     export default {
-        props:['Users','currentUser'],
-        name: 'app',
-
-        data () {
-            return {
-
+        computed:{
+            Users(){
+                return this.$store.getters.Users;
+            },
+            currentUser() {
+                return this.$store.getters.currentUser;
             }
         },
         methods:{
             OtherUser(UserChoise) {
-                this.$emit("otherUser",UserChoise)
+                this.$store.dispatch('OtherUser',UserChoise);
             }
-
         }
     }
 

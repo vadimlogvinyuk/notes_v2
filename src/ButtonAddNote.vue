@@ -1,5 +1,5 @@
 <template>
-    <div v-if="Users.length > 0">
+    <div v-if="this.$store.state.Users.length > 0">
         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#addNoteModal"
                 data-whatever="@getbootstrap">&#10010; Add note</button>
 
@@ -34,7 +34,6 @@
 
 <script>
     export default {
-        props:['Users'],
         name: 'app',
 
         data () {
@@ -43,11 +42,10 @@
             }
         },
         methods:{
-            onClickAddNote(event) {
-                this.$emit("newNote",this.NotesText)
-                this.NotesText = ''
+            onClickAddNote() {
+                this.$store.dispatch('onClickAddNote',this.NotesText);
+                this.NotesText = '';
             }
-
         }
     }
 

@@ -11,17 +11,15 @@
                     data-target="#addUserModal" data-whatever="@mdo">Add user</button>
           </li>
         </ul>
-
-        <app-Input-OtherUser :Users="Users" :currentUser="currentUser" @otherUser="otherUser($event)"></app-Input-OtherUser>
-        <app-Input-AllNotes :Users="Users"  :currentUser="currentUser"></app-Input-AllNotes>
+        <app-Input-OtherUser></app-Input-OtherUser>
+        <app-Input-AllNotes></app-Input-AllNotes>
       </div>
 
     </nav>
 
-    <app-Input-User @newUser="setNewUser($event)"></app-Input-User>
-    <app-Input-Note   :Users="Users" @newNote="onClickAddNote($event)"></app-Input-Note>
-
-    <app-Output-Notes :Users="Users"  :currentUser="currentUser"></app-Output-Notes>
+    <app-Input-User></app-Input-User>
+    <app-Input-Note></app-Input-Note>
+    <app-Output-Notes></app-Output-Notes>
 
   </div>
 </template>
@@ -35,63 +33,12 @@
   import OutputNotes    from './TableOut.vue'
 
 export default {
-  name: 'app',
-  data () {
-    return {
-        Users:[],
-        currentUser: {}
-    }
-  },
     components:{
         'app-Input-User'     : InputUser,
         'app-Input-Note'     : InputNote,
         'app-Input-OtherUser': InputOtherUser,
         'app-Input-AllNotes' : InpuAllNotes,
-        'app-Output-Notes'   : OutputNotes
-
-
-    },
-    methods:{
-      setNewUser: function (name) {
-
-          if (name == "") {
-              alert("Oops, user name is not correct");
-              return;
-          }
-
-          var userFound = false;
-          for (var i=0; this.Users.length > i; i++)
-          {
-              if (name == this.Users[i].userName) userFound=true;
-          }
-
-          if (!userFound) {
-
-              var user = {
-                  userName:name,
-                  Notes:[]
-              };
-
-              this.Users.push(user);
-              this.currentUser = user;
-          } else {
-
-          }
-          name = '';
-
-      },
-        onClickAddNote: function (NotesText) {
-            if (NotesText.length == 0) {
-                alert("please add text ...");
-            }else {
-                this.currentUser.Notes.push({note:NotesText,act: false});
-                NotesText = '';
-            }
-
-        },
-        otherUser(user) {
-          this.currentUser = user;
-        }
+        'app-Output-Notes'   : OutputNotes,
 
     }
 }

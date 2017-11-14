@@ -1,5 +1,5 @@
 <template>
-    <div v-if="Users.length > 0">
+    <div v-if="this.$store.state.Users.length > 0">
         <button type="button" class="btn btn btn-link" data-toggle="modal"
                 data-target="#allNote" data-whatever="@mdo">All notes</button>
 
@@ -33,21 +33,14 @@
 
 <script>
     export default {
-        props:['Users','currentUser'],
-        name: 'app',
+       computed: {
+           Users() {
+               return this.$store.getters.Users;
+           }
 
-        data () {
-            return {
-
-            }
-        },
-        methods:{
-            OtherUser(UserChoise) {
-                this.$emit("otherUser",UserChoise)
-            }
-
-        }
+       }
     }
+
 
 </script>
 

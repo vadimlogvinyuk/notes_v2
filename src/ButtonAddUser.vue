@@ -35,17 +35,14 @@
                 userName:''
             }
         },
-        methods:{
-            addNewUser(event) {
-                this.$emit("newUser",this.userName)
-                this.userName =''
-
+        methods: {
+            addNewUser() {
+                this.$store.dispatch('addNewUser',this.userName);
+                this.userName = "";
             }
 
-
-
-
         }
+
     }
 
 </script>
